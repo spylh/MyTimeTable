@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">寝坊時刻表</string>
+    <string name="search_tab_text">経路検索</string>
+    <string name="my_route_tab_text">マイルート</string>
+    <string name="timer_tab_text">通勤タイマー</string>
+</resources>

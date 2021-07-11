@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MyTimeTable</string>
+    <string name="title_activity_overview" translatable="false">OverviewActivity</string>
+    <string name="tab_text_1" translatable="false">Tab 1</string>
+    <string name="tab_text_2" translatable="false">Tab 2</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="search_tab_text">Search</string>
+    <string name="my_route_tab_text">MyRoute</string>
+    <string name="timer_tab_text">LeaveTimer</string>
+</resources>
