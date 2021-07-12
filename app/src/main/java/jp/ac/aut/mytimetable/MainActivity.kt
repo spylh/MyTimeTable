@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val walkThroughButton: Button = findViewById(R.id.walk_through_debug)
         walkThroughButton.setOnClickListener{
-            val intent = Intent(application,WalkThroughActyvity::class.java)
+            val intent = Intent(application,WalkThroughActivity::class.java)
             startActivity(intent)
         }
         val overViewButton : Button = findViewById<Button>(R.id.overview_button)

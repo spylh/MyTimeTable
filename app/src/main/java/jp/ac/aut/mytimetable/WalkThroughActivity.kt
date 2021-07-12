@@ -5,15 +5,15 @@ import android.graphics.Color
 import android.os.Bundle
 import com.stephentuso.welcome.*
 
-class WalkThroughActyvity : WelcomeActivity() {
+class WalkThroughActivity : WelcomeActivity() {
 
     companion object{
         fun showIfNeeded(activity: Activity,savedInstanceState: Bundle?){
-            WelcomeHelper(activity,WalkThroughActyvity::class.java).show(savedInstanceState)
+            WelcomeHelper(activity,WalkThroughActivity::class.java).show(savedInstanceState)
         }
 
         fun showForcibly(activity: Activity){
-            WelcomeHelper(activity,WalkThroughActyvity::class.java).forceShow()
+            WelcomeHelper(activity,WalkThroughActivity::class.java).forceShow()
         }
 
     }

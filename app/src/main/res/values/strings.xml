@@ -8,4 +8,5 @@
     <string name="search_tab_text">Search</string>
     <string name="my_route_tab_text">MyRoute</string>
     <string name="timer_tab_text">LeaveTimer</string>
+    <string name="search_title">駅を検索</string>
 </resources>

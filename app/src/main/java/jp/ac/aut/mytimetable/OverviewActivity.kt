@@ -21,23 +21,26 @@ class overview_activity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_overview)
 
-        viewPager = findViewById(R.id.view_pager2)
-        val pager_adapter = overview_viewpager_adapter(this)
-        viewPager.adapter = pager_adapter
+        viewPager = findViewById(R.id.viewPager)
+        val pagerAdapter = OverviewPagerAdapter(this)
+        viewPager.adapter = pagerAdapter
     }
 
-    override fun onBackPressed() {
-        if (viewPager.currentItem == 0) {
+    override fun onBackPressed(){
+
+        if(viewPager.currentItem == 0){
             super.onBackPressed()
-        } else {
-            viewPager.currentItem = viewPager.currentItem--
         }
+        else {
+             viewPager.currentItem = viewPager.currentItem-1
+        }
+
     }
 
-    private inner class overview_viewpager_adapter(fa: FragmentActivity,private val items : List<Items>): FragmentStateAdapter(fa) {
-        override fun getItemCount(): Int  = NUM_PAGES
+    private inner class OverviewPagerAdapter(fa : FragmentActivity) : FragmentStateAdapter(fa){
+        override fun getItemCount(): Int = NUM_PAGES
 
-        override fun createFragment(position: Int): Fragment = items[position].createFragment()
+        override fun createFragment(position: Int): Fragment = searchFragment()
     }
 
 }
