@@ -16,38 +16,33 @@ import java.net.URL
 public class HitAPITask{
 
     public suspend fun requestHttp(url:String?):String {
-        try {
+        var connection: HttpURLConnection
+        var reader: BufferedReader
+        val buffer: StringBuffer
+        //GET
+        val url = URL(url)
+        connection = url.openConnection() as HttpURLConnection
+        connection.connect()
 
-            withContext(Dispatchers.Main){
-                //onPreExecute()
-            }
+        //bufferに取得したのを入れる
+        val stream = connection.inputStream
+        reader = BufferedReader(InputStreamReader(stream))
+        buffer = StringBuffer()
+
+        try {
 
             //doInBackground()
             Thread.sleep(800)
             //ここでAPIを叩きます。バックグラウンドで処理する内容です。
-            var connection: HttpURLConnection? = null
-            var reader: BufferedReader? = null
-            val buffer: StringBuffer
-
-            try {
-                //GET
-                val url = URL(url)
-                connection = url.openConnection() as HttpURLConnection
-                connection.connect()
-
-                //bufferに取得したのを入れる
-                val stream = connection.inputStream
-                reader = BufferedReader(InputStreamReader(stream))
-                buffer = StringBuffer()
-                var line: String?
-                while (true) {
-                    line = reader.readLine()
-                    if (line == null) {
-                        break
-                    }
-                    buffer.append(line)
-                    //Log.d("CHECK", buffer.toString())
-                }
+//                var line: String?
+//                while (true) {
+//                    line = reader.readLine()
+//                    if (line == null) {
+//                        break
+//                    }
+//                    buffer.append(line)
+//                    Log.d("CHECK", buffer.toString())
+//                }
 
                 val jsonText = buffer.toString()
                 return jsonText
@@ -58,22 +53,16 @@ public class HitAPITask{
             } catch (e: IOException) {
                 e.printStackTrace()
             }
+
             //接続の切断
             finally {
-                connection?.disconnect()
+                connection.disconnect()
                 try {
                     reader?.close()
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
             }
-
-
-
-        }
-        catch (e : IOException){
-            //NOP
-        }
 
         withContext(Dispatchers.Main){
             //onPostExecute()

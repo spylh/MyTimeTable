@@ -8,28 +8,44 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import android.widget.ImageButton
+import android.widget.Toast
+import kotlinx.coroutines.*
 
 
 class searchFragment : Fragment() {
+    public val rootView : View? = null
+    val job  = Job()
+    val uiScope = CoroutineScope(Dispatchers.Main + job)
     private lateinit var edittext : EditText
-    private lateinit var button : Button
+    private lateinit var button : ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        onCreateView(inflater,container,savedInstanceState)
+        super.onCreateView(inflater,container,savedInstanceState)
+        return inflater.inflate(R.layout.fragment_search, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         edittext = requireView().findViewById(R.id.station_name)
         val EkispartAPI : Ekispart_parse = Ekispart_parse()
-        button = requireView().findViewById<Button>(R.id.searchButton)
+        button = view?.findViewById<ImageButton>(R.id.searchButton)!!
         button.setOnClickListener{
-            GlobalScope.launch{
+            uiScope.launch {
                 EkispartAPI.searchStationCode("")
+                withContext(Dispatchers.Main){
+                  Toast.makeText(context,"tinpo", Toast.LENGTH_SHORT).show()
+                }
             }
         }
-        return inflater.inflate(R.layout.fragment_search, container, false)
+    }
+
+    override fun onDestroy() {
+        job.cancel()
+        super.onDestroy()
     }
 
 }
