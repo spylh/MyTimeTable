@@ -2,14 +2,12 @@ package jp.ac.aut.mytimetable
 
 import Ekispart_parse
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.Toast
+import android.widget.*
 import kotlinx.coroutines.*
 
 
@@ -30,17 +28,34 @@ class searchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //オブジェの取得
         edittext = requireView().findViewById(R.id.station_name)
+        val resultview = requireView().findViewById<ListView>(R.id.Search_result)
         val EkispartAPI : Ekispart_parse = Ekispart_parse()
+        var Ekispa_result : ArrayList<Ekispart_parse.station_detail>
+        lateinit var station_name : Array<String>
+        var station_code : Array<Int>
+
+
+        //onclick
         button = view?.findViewById<ImageButton>(R.id.searchButton)!!
         button.setOnClickListener{
             uiScope.launch {
-                EkispartAPI.searchStationCode("")
-                withContext(Dispatchers.Main){
-                  Toast.makeText(context,"tinpo", Toast.LENGTH_SHORT).show()
+                Ekispa_result = EkispartAPI.searchStationCode(edittext.text.toString()) as ArrayList<Ekispart_parse.station_detail>
+                Ekispa_result.forEach{
+                    station_name = arrayOf(it.name)
+                    station_code = arrayOf(it.code)
                 }
             }
+            val adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_expandable_list_item_1,
+                station_name
+            )
+
+            resultview.adapter = adapter
         }
+
     }
 
     override fun onDestroy() {
