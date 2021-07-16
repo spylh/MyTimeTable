@@ -17,6 +17,7 @@ class searchFragment : Fragment() {
     val uiScope = CoroutineScope(Dispatchers.Main + job)
     private lateinit var edittext : EditText
     private lateinit var button : ImageButton
+    private lateinit var text : TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +31,8 @@ class searchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //オブジェの取得
         edittext = requireView().findViewById(R.id.station_name)
-        val resultview = requireView().findViewById<ListView>(R.id.Search_result)
+        text = requireView().findViewById(R.id.textView)
+//        val resultview = requireView().findViewById<ListView>(R.id.Search_result)
         val EkispartAPI : Ekispart_parse = Ekispart_parse()
         var Ekispa_result : ArrayList<Ekispart_parse.station_detail>
         lateinit var station_name : Array<String>
@@ -39,21 +41,20 @@ class searchFragment : Fragment() {
 
         //onclick
         button = view?.findViewById<ImageButton>(R.id.searchButton)!!
+        text
         button.setOnClickListener{
             uiScope.launch {
                 Ekispa_result = EkispartAPI.searchStationCode(edittext.text.toString()) as ArrayList<Ekispart_parse.station_detail>
+            /*
                 Ekispa_result.forEach{
                     station_name = arrayOf(it.name)
                     station_code = arrayOf(it.code)
-                }
-            }
-            val adapter = ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_expandable_list_item_1,
-                station_name
-            )
 
-            resultview.adapter = adapter
+                }
+                */
+                text.text = Ekispa_result.toString()
+            }
+
         }
 
     }
