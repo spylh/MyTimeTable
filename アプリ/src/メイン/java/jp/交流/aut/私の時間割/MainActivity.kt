@@ -11,6 +11,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val walkThroughButton: Button = findViewById(R.id.walk_through_debug)
+        val intent = Intent(application,WalkThroughActivity::class.java)
+        startActivity(intent)
         walkThroughButton.setOnClickListener{
             val intent = Intent(application,WalkThroughActivity::class.java)
             startActivity(intent)
