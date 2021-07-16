@@ -34,7 +34,7 @@ public class Ekispart_parse{
     )
 
     //必要最低限の実装
-     suspend fun searchStationCode(station_name : String): List<point>? {
+     suspend fun searchStationCode(station_name : String): MutableList<station_detail> {
         var url : String = "http://api.ekispert.jp/v1/json/station/light?key=LE_LRFtfW2vJbVYS&name=$station_name&type=train"
 
         //httpリクエスト周り
@@ -51,11 +51,11 @@ public class Ekispart_parse{
         Log.d("CHECK","Result : ${root.toString()}")
         val pointObj = root?.ResultSet?.Point
 
-        //for((index,value) in pointObj!!.withIndex()){
-          //  result.add(station_detail(value.Station.code,value.Station.Name))
-        //}
+        for((index,value) in pointObj!!.withIndex()){
+            result.add(station_detail(value.Station.code,value.Station.Name))
+        }
         Log.d("","")
-        return pointObj
+        return result
 
 
     }
