@@ -47,13 +47,14 @@ class searchFragment : Fragment() {
                     station_code = arrayOf(it.code)
                 }
             }
+            /*
             val adapter = ArrayAdapter(
                 requireContext(),
                 android.R.layout.simple_expandable_list_item_1,
                 station_name
             )
 
-            resultview.adapter = adapter
+            resultview.adapter = adapter*/
         }
 
     }
